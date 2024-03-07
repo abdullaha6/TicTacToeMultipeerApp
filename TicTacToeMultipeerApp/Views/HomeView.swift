@@ -19,11 +19,6 @@ struct HomeView: View {
                 VStack {
                     Spacer()
                     
-                    Text(viewModel.receivedData)
-                        .tracking(1)
-                        .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
-                        .padding(.bottom, 50)
-                    
                     Text("Tic Tac Toe")
                         .tracking(1)
                         .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
@@ -33,15 +28,15 @@ struct HomeView: View {
                         .padding(.bottom, 100)
                     
                     Button(action: {
-                        viewModel.send(move: "Hello")
+                        viewModel.showTicTacToeView = true
                     }, label: {
                         TextButton(title: "Play With AI")
                             .foregroundStyle(.background)
                     })
                     
                     Button(action: {
-                        viewModel.isAdvertised = true
-                        viewModel.showSheet    = true
+                        viewModel.isAdvertised   = true
+                        viewModel.playerListView = true
                     }, label: {
                         TextButton(title: "Multiplayer")
                             .foregroundStyle(.background)
@@ -50,8 +45,8 @@ struct HomeView: View {
                     Spacer()
                 }
             }
-            .fullScreenCover(isPresented: $viewModel.showSheet) { GameView(viewModel: viewModel) }
-//            .sheet(isPresented: $viewModel.showSheet) { PlayerListView(viewModel: viewModel) }
+            .fullScreenCover(isPresented: $viewModel.playerListView)    { GameView(viewModel: viewModel) }
+            .fullScreenCover(isPresented: $viewModel.showTicTacToeView) { TicTacToeGameView(viewModel: viewModel) }
         }
     }
 }

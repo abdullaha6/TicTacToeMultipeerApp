@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct TextButton: View {
+    let title    : String
+    var isInverse: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(title)
+//            .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 20))
+            .multilineTextAlignment(.center)
+            .tracking(2)
+            .padding(.vertical, 10)
+            .frame(width: 200)
+            .background(isInverse ? Color(.bg) : .black)
+            .clipShape(RoundedRectangle(cornerRadius: 7))
     }
 }
 
 #Preview {
-    TextButton()
+    TextButton(title: "Reset Button")
 }

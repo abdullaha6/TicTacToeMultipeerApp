@@ -36,7 +36,7 @@ enum Tile {
 }
 
 class GameState: ObservableObject {
-    // Board is a 2D array of type Tile -> This array stores .cross, .nought or .empty
+    // Board is a 3x3 2D array of type Tile -> This array stores .cross, .nought or .empty
     @Published var board: [[Tile]]     = Array(repeating: Array(repeating: .empty, count: 3), count: 3)
     @Published var currentPlayer: Tile = .cross
     @Published var count               = 0
@@ -49,7 +49,7 @@ class GameState: ObservableObject {
     @Published var isGameOver          = false
 //    @Published var isGameWon           = false
     
-    @Published var showSheet           = false
+    @Published var isSettingsViewPresented = false
     
     
     func cellTapped(row: Int, column: Int) {

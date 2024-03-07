@@ -7,18 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19161E892B904CC000AFD7CA /* TicTacToeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19161E882B904CC000AFD7CA /* TicTacToeGameView.swift */; };
+		19161E8B2B904CFD00AFD7CA /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19161E8A2B904CFD00AFD7CA /* TextButton.swift */; };
 		19705C182B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C172B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift */; };
-		19705C1A2B8710DB0070CCD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C192B8710DB0070CCD8 /* ContentView.swift */; };
+		19705C1A2B8710DB0070CCD8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C192B8710DB0070CCD8 /* GameView.swift */; };
 		19705C1C2B8710DD0070CCD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19705C1B2B8710DD0070CCD8 /* Assets.xcassets */; };
 		19705C1F2B8710DD0070CCD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19705C1E2B8710DD0070CCD8 /* Preview Assets.xcassets */; };
+		19705C262B899CF40070CCD8 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C252B899CF40070CCD8 /* TicTacToeViewModel.swift */; };
+		19705C282B8DB9C10070CCD8 /* DeviceFinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */; };
+		19705C2C2B8DD4110070CCD8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C2B2B8DD4110070CCD8 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19161E882B904CC000AFD7CA /* TicTacToeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeGameView.swift; sourceTree = "<group>"; };
+		19161E8A2B904CFD00AFD7CA /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		19705C142B8710DB0070CCD8 /* TicTacToeMultipeerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToeMultipeerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19705C172B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeMultipeerAppApp.swift; sourceTree = "<group>"; };
-		19705C192B8710DB0070CCD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		19705C192B8710DB0070CCD8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		19705C1B2B8710DD0070CCD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19705C1E2B8710DD0070CCD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		19705C252B899CF40070CCD8 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
+		19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFinderViewModel.swift; sourceTree = "<group>"; };
+		19705C292B8DBB8B0070CCD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		19705C2B2B8DD4110070CCD8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +43,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19161E872B904C5600AFD7CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19705C2B2B8DD4110070CCD8 /* HomeView.swift */,
+				19705C192B8710DB0070CCD8 /* GameView.swift */,
+				19161E8D2B904D3800AFD7CA /* TicTacToeGame */,
+				19161E8C2B904D1D00AFD7CA /* CustomViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		19161E8C2B904D1D00AFD7CA /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				19161E8A2B904CFD00AFD7CA /* TextButton.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		19161E8D2B904D3800AFD7CA /* TicTacToeGame */ = {
+			isa = PBXGroup;
+			children = (
+				19161E882B904CC000AFD7CA /* TicTacToeGameView.swift */,
+				19705C252B899CF40070CCD8 /* TicTacToeViewModel.swift */,
+			);
+			path = TicTacToeGame;
+			sourceTree = "<group>";
+		};
 		19705C0B2B8710DB0070CCD8 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				19705C172B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift */,
-				19705C192B8710DB0070CCD8 /* ContentView.swift */,
+				19705C292B8DBB8B0070CCD8 /* Info.plist */,
 				19705C1B2B8710DD0070CCD8 /* Assets.xcassets */,
+				19161E872B904C5600AFD7CA /* Views */,
+				19705C2A2B8DBBF00070CCD8 /* MultipeerConnectivity */,
 				19705C1D2B8710DD0070CCD8 /* Preview Content */,
 			);
 			path = TicTacToeMultipeerApp;
@@ -65,6 +106,14 @@
 				19705C1E2B8710DD0070CCD8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		19705C2A2B8DBBF00070CCD8 /* MultipeerConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */,
+			);
+			path = MultipeerConnectivity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19705C1A2B8710DB0070CCD8 /* ContentView.swift in Sources */,
+				19705C1A2B8710DB0070CCD8 /* GameView.swift in Sources */,
+				19161E892B904CC000AFD7CA /* TicTacToeGameView.swift in Sources */,
+				19161E8B2B904CFD00AFD7CA /* TextButton.swift in Sources */,
+				19705C262B899CF40070CCD8 /* TicTacToeViewModel.swift in Sources */,
+				19705C282B8DB9C10070CCD8 /* DeviceFinderViewModel.swift in Sources */,
+				19705C2C2B8DD4110070CCD8 /* HomeView.swift in Sources */,
 				19705C182B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +308,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -275,11 +329,14 @@
 				DEVELOPMENT_TEAM = HTD2R5HHKY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicTacToeMultipeerApp/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "TicTacToe needs to use your phone’s data to discover devices nearby";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +361,14 @@
 				DEVELOPMENT_TEAM = HTD2R5HHKY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicTacToeMultipeerApp/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "TicTacToe needs to use your phone’s data to discover devices nearby";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
