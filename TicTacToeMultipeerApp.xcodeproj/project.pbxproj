@@ -16,6 +16,7 @@
 		19705C262B899CF40070CCD8 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C252B899CF40070CCD8 /* TicTacToeViewModel.swift */; };
 		19705C282B8DB9C10070CCD8 /* DeviceFinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */; };
 		19705C2C2B8DD4110070CCD8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19705C2B2B8DD4110070CCD8 /* HomeView.swift */; };
+		19E30B912B9AC23300C61053 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E30B902B9AC23300C61053 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +29,9 @@
 		19705C1E2B8710DD0070CCD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		19705C252B899CF40070CCD8 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFinderViewModel.swift; sourceTree = "<group>"; };
-		19705C292B8DBB8B0070CCD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		19705C292B8DBB8B0070CCD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19705C2B2B8DD4110070CCD8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		19E30B902B9AC23300C61053 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			children = (
 				19705C2B2B8DD4110070CCD8 /* HomeView.swift */,
 				19705C192B8710DB0070CCD8 /* GameView.swift */,
+				19E30B902B9AC23300C61053 /* SettingsView.swift */,
 				19161E8D2B904D3800AFD7CA /* TicTacToeGame */,
 				19161E8C2B904D1D00AFD7CA /* CustomViews */,
 			);
@@ -90,9 +93,7 @@
 		19705C162B8710DB0070CCD8 /* TicTacToeMultipeerApp */ = {
 			isa = PBXGroup;
 			children = (
-				19705C172B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift */,
-				19705C292B8DBB8B0070CCD8 /* Info.plist */,
-				19705C1B2B8710DD0070CCD8 /* Assets.xcassets */,
+				19E30B932B9ACB1800C61053 /* Resources */,
 				19161E872B904C5600AFD7CA /* Views */,
 				19705C2A2B8DBBF00070CCD8 /* MultipeerConnectivity */,
 				19705C1D2B8710DD0070CCD8 /* Preview Content */,
@@ -114,6 +115,16 @@
 				19705C272B8DB9C10070CCD8 /* DeviceFinderViewModel.swift */,
 			);
 			path = MultipeerConnectivity;
+			sourceTree = "<group>";
+		};
+		19E30B932B9ACB1800C61053 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19705C172B8710DB0070CCD8 /* TicTacToeMultipeerAppApp.swift */,
+				19705C292B8DBB8B0070CCD8 /* Info.plist */,
+				19705C1B2B8710DD0070CCD8 /* Assets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19705C1A2B8710DB0070CCD8 /* GameView.swift in Sources */,
+				19E30B912B9AC23300C61053 /* SettingsView.swift in Sources */,
 				19161E892B904CC000AFD7CA /* TicTacToeGameView.swift in Sources */,
 				19161E8B2B904CFD00AFD7CA /* TextButton.swift in Sources */,
 				19705C262B899CF40070CCD8 /* TicTacToeViewModel.swift in Sources */,
@@ -251,7 +263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -308,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

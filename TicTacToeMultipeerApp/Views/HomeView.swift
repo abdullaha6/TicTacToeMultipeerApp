@@ -23,10 +23,6 @@ struct HomeView: View {
                         .tracking(1)
                         .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
                     
-                    Text("A Classic Game")
-                        .tracking(2)
-                        .padding(.bottom, 100)
-                    
                     Button(action: {
                         viewModel.showTicTacToeView = true
                     }, label: {

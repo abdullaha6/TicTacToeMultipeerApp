@@ -53,12 +53,6 @@ struct PlayerListView: View {
                             .foregroundStyle(Color(.bg))
                         
                         Spacer()
-                        
-//                        if viewModel.isPaired {
-//                            Image(systemName: "checkmark.circle")
-//                                .imageScale(.medium)
-//                                .foregroundStyle(.green)
-//                        }
                     }
                     .onTapGesture {
                         viewModel.selectedPeer = peer

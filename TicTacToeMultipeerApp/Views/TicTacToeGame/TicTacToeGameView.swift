@@ -70,7 +70,7 @@ struct TicTacToeGameView: View {
                                     .onTapGesture {
                                         if viewModel.isMyTurn {
                                             gameState.cellTapped(row: row, column: column)
-                                            viewModel.send(row: row, col: column)
+                                            viewModel.send(isConnected: true, isGameReset: false, row: row, col: column)
                                         }
                                     }
                                 
@@ -94,8 +94,17 @@ struct TicTacToeGameView: View {
                     }
                 }
                 .onAppear {
-                    viewModel.onReceived = { receivedRow, receivedCol in
-                        gameState.cellTapped(row: receivedRow, column: receivedCol)
+                    viewModel.onReceived = { isPeerConnected, isGameReset, row, col in
+                        if isPeerConnected {
+                            if isGameReset == true {
+                                gameState.resetGame()
+                            } else {
+                                gameState.cellTapped(row: row, column: col)
+                            }
+                        } else {
+                            gameState.resetScores()
+                            print("Show opponent disconnected alert")
+                        }
                     }
                 }
                 .background(.foreground)
@@ -127,9 +136,10 @@ struct TicTacToeGameView: View {
                 .padding(.horizontal, 20)
                 
                 
-                // RESTART BUTTON
+                // RESET BUTTON
                 Button(action: {
                     gameState.resetGame()
+                    viewModel.send(isConnected: true, isGameReset: true, row: 0, col: 0)
                 }, label: {
                     TextButton(title: "Reset Game")
                         .foregroundStyle(.background)
@@ -140,7 +150,7 @@ struct TicTacToeGameView: View {
             }
             .padding(30)
             .sheet(isPresented: $gameState.isSettingsViewPresented) {
-                SettingsView(gameState: gameState)
+                SettingsView(gameState: gameState, viewModel: viewModel)
             }
         }
     }
@@ -148,38 +158,4 @@ struct TicTacToeGameView: View {
 
 #Preview {
     TicTacToeGameView(viewModel: DeviceFinderViewModel())
-}
-
-struct SettingsView: View {
-    @ObservedObject var gameState: GameState
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            Button(action: {
-                gameState.resetGame()
-                gameState.isSettingsViewPresented = false
-            }, label: {
-                TextButton(title: "Reset Game", isInverse: true)
-                    .foregroundStyle(.foreground)
-            })
-            
-            Button(action: {
-                gameState.resetScores()
-                gameState.isSettingsViewPresented = false
-            }, label: {
-                TextButton(title: "Restart Game", isInverse: true)
-                    .foregroundStyle(.foreground)
-            })
-            
-            Button(action: {
-                print("Disconnect")
-            }, label: {
-                TextButton(title: "Disconnect", isInverse: true)
-                    .foregroundStyle(.foreground)
-            })
-        }
-        .presentationDetents([.height(200)])
-        .presentationCornerRadius(15)
-        .presentationBackground(.foreground)
-    }
 }

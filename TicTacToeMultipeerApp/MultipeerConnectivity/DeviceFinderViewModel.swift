@@ -14,12 +14,12 @@ class DeviceFinderViewModel: NSObject, ObservableObject {
     private let session     : MCSession
     private let serviceType = "TicTacToe"
     
-    var onReceived: ((Int, Int) -> Void)?
+    var onReceived: ((Bool, Bool, Int, Int) -> Void)?
     
     @Published var peers: [PeerDevice] = [] // To store the available peers
     @Published var permissionRequest: PermitionRequest?
     
-    @Published var isMyTurn   = false // Bool to store which player goes first
+    @Published var isMyTurn       = false // Bool to store which player goes first
         
     @Published var receivedInvite = false
     @Published var selectedPeer: PeerDevice? {
@@ -27,7 +27,7 @@ class DeviceFinderViewModel: NSObject, ObservableObject {
             connect()
         }
     }
-    @Published var isPaired       = false
+    @Published var isPaired                 = false
     @Published var joinedPeer: [PeerDevice] = []
     
     @Published var playerListView    = false
@@ -44,9 +44,9 @@ class DeviceFinderViewModel: NSObject, ObservableObject {
         session  = MCSession(peer: peer)
         
         advertiser = MCNearbyServiceAdvertiser(
-            peer: peer,
+            peer         : peer,
             discoveryInfo: nil,
-            serviceType: serviceType
+            serviceType  : serviceType
         )
         
         browser = MCNearbyServiceBrowser(peer: peer, serviceType: serviceType)
@@ -70,6 +70,10 @@ class DeviceFinderViewModel: NSObject, ObservableObject {
     func stopBrowsing() {
         browser.stopBrowsingForPeers()
         peers.removeAll()
+    }
+    
+    func disconnect() {
+        session.disconnect()
     }
     
     func show(peerId: MCPeerID) {
@@ -101,23 +105,16 @@ class DeviceFinderViewModel: NSObject, ObservableObject {
         }
     }
     
-    func send(row: Int, col: Int) {
-        let rowStr = String(row)
-        let colStr = String(col)
-        
-        guard let rowData = rowStr.data(using: .utf8) else {
-            return
-        }
-        
-        guard let colData = colStr.data(using: .utf8) else {
-            return
-        }
-        
+    func send(isConnected: Bool, isGameReset: Bool, row: Int, col: Int) {
+
+        let dataToSend = GameData(isPeerConnected: isConnected, isGameReset: isGameReset, isGameRestarted: false, row: row, col: col)
         isMyTurn = !isMyTurn
         
         if !session.connectedPeers.isEmpty {
             do {
-                try session.send(rowData + colData, toPeers: session.connectedPeers, with: .reliable)
+                let jsonData = try JSONEncoder().encode(dataToSend)
+                try session.send(jsonData, toPeers: session.connectedPeers, with: .reliable)
+                
             } catch {
                 print("Failed to send data with error: \(error.localizedDescription)")
             }
@@ -187,19 +184,29 @@ extension DeviceFinderViewModel: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
-            // Handle received data
-            if let receivedString = String(data: data, encoding: .utf8) {
-                // Process receivedString
-                print("Received string from \(peerID.displayName): \(receivedString)")
+            do {
+                let receivedData = try JSONDecoder().decode(GameData.self, from: data)
+
+                let row             = receivedData.row
+                let col             = receivedData.col
+                let isConnected     = receivedData.isPeerConnected
+                let isGameReset     = receivedData.isGameReset
                 
-                let row = receivedString.prefix(1)
-                let col = receivedString.suffix(1)
-                
-                self.isMyTurn = !self.isMyTurn
-                
-                if let onReceived = self.onReceived {
-                    onReceived(Int(row)!, Int(col)!)
+                if isConnected {
+                    self.isMyTurn = !self.isMyTurn
+                    if let onReceived = self.onReceived {
+                        onReceived(isConnected, isGameReset, row, col) // If connected, proceed
+                    }
+                } else {
+                    print("Disconnecting")
+                    if let onReceived = self.onReceived {
+                        onReceived(isConnected, isGameReset, row, col)
+                    }
+                    session.disconnect()
                 }
+                
+            } catch {
+                print("Error decoding data: \(error)")
             }
         }
     }
@@ -225,4 +232,12 @@ struct PermitionRequest: Identifiable {
     let id = UUID()
     let peerId: MCPeerID
     let onRequest: (Bool) -> Void
+}
+
+struct GameData: Codable {
+    let isPeerConnected: Bool
+    let isGameReset    : Bool
+    let isGameRestarted: Bool
+    let row            : Int
+    let col            : Int
 }
