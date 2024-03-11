@@ -42,7 +42,7 @@ struct HomeView: View {
                 }
             }
             .fullScreenCover(isPresented: $viewModel.playerListView)    { GameView(viewModel: viewModel) }
-            .fullScreenCover(isPresented: $viewModel.showTicTacToeView) { TicTacToeGameView(viewModel: viewModel) }
+            .fullScreenCover(isPresented: $viewModel.showTicTacToeView) { TicTacToeGameView(DFViewModel: viewModel) }
         }
     }
 }

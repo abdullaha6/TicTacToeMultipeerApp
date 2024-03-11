@@ -20,7 +20,7 @@ struct GameView: View {
                     .offset(y: viewModel.isPaired ? -200 : 0)
                     .opacity(viewModel.isPaired ? 0 : 1)
                 
-                TicTacToeGameView(viewModel: viewModel)
+                TicTacToeGameView(DFViewModel: viewModel)
                     .offset(y: viewModel.isPaired ? 0 : 200)
                     .opacity(viewModel.isPaired ? 1 : 0)
             }

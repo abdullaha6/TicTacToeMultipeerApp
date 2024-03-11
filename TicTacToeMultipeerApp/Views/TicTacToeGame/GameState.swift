@@ -1,5 +1,5 @@
 //
-//  TicTacToeViewModel.swift
+//  GameState.swift
 //  TicTacToeMultipeerApp
 //
 //  Created by Abdullah Ajmal on 2024-02-24.
@@ -15,9 +15,19 @@ enum Tile {
     var displayTitle: String {
         switch self {
         case .nought:
-            return "circle" // cat.fill"
+            return "circle"
         case .cross:
-            return "plus" // dog.fill"
+            return "plus"
+        case .empty:
+            return ""
+        }
+    }
+    var displayTitle1: String {
+        switch self {
+        case .nought:
+            return "O"
+        case .cross:
+            return "X"
         case .empty:
             return ""
         }
@@ -47,12 +57,11 @@ class GameState: ObservableObject {
     @Published var crossScore          = 0
     
     @Published var isGameOver          = false
-//    @Published var isGameWon           = false
     
     @Published var isSettingsViewPresented = false
     
     
-    func cellTapped(row: Int, column: Int) {
+    func cellTapped(row: Int, column: Int, isMyTurn: Bool) {
         if !isGameOver { // If game is not over, then proceed
             
             guard board[row][column] == .empty else { return } // Only if board[row][column] is empty it will go thru
@@ -64,7 +73,12 @@ class GameState: ObservableObject {
             if checkForWin() {
                 isGameOver = true
                 count = 0
-                gameStateText = "\(currentPlayer) wins!"
+                
+                if isMyTurn {
+                    gameStateText = "You Win!"
+                } else {
+                    gameStateText = "You Lose!"
+                }
                 
                 if currentPlayer == .cross {
                     crossScore += 1

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TicTacToeGameView: View {
     @StateObject var gameState   = GameState()
-    @ObservedObject var viewModel: DeviceFinderViewModel
+    @ObservedObject var DFViewModel: DeviceFinderViewModel
     
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct TicTacToeGameView: View {
                 // GAME STATE TEXT
                 if gameState.gameStateText.isEmpty {
                     // GAME STATE TEXT
-                    Text(viewModel.isMyTurn ? "Your Turn" : "Opponent's Turn")
+                    Text(DFViewModel.isMyTurn ? "Your Turn" : "Opponent's Turn")
                         .frame(height: 30)
                         .bold()
                         .padding(.bottom, 30)
@@ -60,52 +60,28 @@ struct TicTacToeGameView: View {
                                 
                                 let cell = gameState.board[row][column]
                                 
-                                Image(systemName: cell.displayTitle)
-                                    .rotationEffect(.degrees(45))
-                                    .foregroundStyle(cell.tileColor)
-                                    .font(.system(size: 40, weight: .semibold, design: .rounded))
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .background(Color(.bg))
-                                    .onTapGesture {
-                                        if viewModel.isMyTurn {
-                                            gameState.cellTapped(row: row, column: column)
-                                            viewModel.send(isConnected: true, isGameReset: false, row: row, col: column)
-                                        }
+                                Group { // Using Group to avoid to avoid code duplication
+                                    if cell == .empty {
+                                        Text(cell.displayTitle1)
+                                    } else {
+                                        Image(systemName: cell.displayTitle)
+                                            .rotationEffect(.degrees(45))
+                                            .foregroundStyle(cell.tileColor)
+                                            .font(.system(size: 40, weight: .semibold, design: .rounded))
                                     }
-                                
-                                //                            Image(systemName: "plus")
-                                //                                .rotationEffect(.degrees(45))
-                                //                                .foregroundStyle(Color(.cross))
-                                //                                .font(.system(size: 50, weight: .semibold, design: .rounded))
-                                //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                //                                .aspectRatio(1, contentMode: .fit)
-                                //                                .background(Color(.bg))
-                                
-                                //                            Text("+")
-                                //                                .rotationEffect(.degrees(45))
-                                //                                .foregroundStyle(Color(.cross))
-                                //                                .font(.system(size: 70, weight: .semibold, design: .rounded))
-                                //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                //                                .aspectRatio(1, contentMode: .fit)
-                                //                                .background(Color(.bg))
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .aspectRatio(1, contentMode: .fit)
+                                .background(Color(.bg))
+                                .onTapGesture {
+                                    makeMove(row: row, column: column)
+                                }
                             }
                         }
                     }
                 }
                 .onAppear {
-                    viewModel.onReceived = { isPeerConnected, isGameReset, row, col in
-                        if isPeerConnected {
-                            if isGameReset == true {
-                                gameState.resetGame()
-                            } else {
-                                gameState.cellTapped(row: row, column: col)
-                            }
-                        } else {
-                            gameState.resetScores()
-                            print("Show opponent disconnected alert")
-                        }
-                    }
+                    onReceivedMove()
                 }
                 .background(.foreground)
                 .border(.black, width: 1)
@@ -128,9 +104,7 @@ struct TicTacToeGameView: View {
                         
                         Text("\(gameState.noughtScore)")
                             .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
-                        
                     }
-                    
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
@@ -139,7 +113,7 @@ struct TicTacToeGameView: View {
                 // RESET BUTTON
                 Button(action: {
                     gameState.resetGame()
-                    viewModel.send(isConnected: true, isGameReset: true, row: 0, col: 0)
+                    DFViewModel.send(isConnected: true, isGameReset: true, row: 0, col: 0)
                 }, label: {
                     TextButton(title: "Reset Game")
                         .foregroundStyle(.background)
@@ -150,12 +124,34 @@ struct TicTacToeGameView: View {
             }
             .padding(30)
             .sheet(isPresented: $gameState.isSettingsViewPresented) {
-                SettingsView(gameState: gameState, viewModel: viewModel)
+                SettingsView(gameState: gameState, viewModel: DFViewModel)
+            }
+        }
+    }
+    
+    func makeMove(row: Int, column: Int) {
+        if DFViewModel.isMyTurn {
+            gameState.cellTapped(row: row, column: column, isMyTurn: true)
+            DFViewModel.send(isConnected: true, isGameReset: false, row: row, col: column)
+        }
+    }
+    
+    func onReceivedMove() {
+        DFViewModel.onReceived = { isPeerConnected, isGameReset, row, col in
+            if isPeerConnected {
+                if isGameReset == true {
+                    gameState.resetGame()
+                } else {
+                    gameState.cellTapped(row: row, column: col, isMyTurn: false)
+                }
+            } else {
+                gameState.resetScores()
+                print("Show opponent disconnected alert")
             }
         }
     }
 }
 
 #Preview {
-    TicTacToeGameView(viewModel: DeviceFinderViewModel())
+    TicTacToeGameView(DFViewModel: DeviceFinderViewModel())
 }
