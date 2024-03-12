@@ -26,6 +26,10 @@ struct GameView: View {
             }
         }
         .animation(.easeInOut, value: viewModel.isPaired)
+        .navigationBarBackButtonHidden(viewModel.isPaired)
+        .onAppear {
+            viewModel.isAdvertised = true
+        }
     }
 }
 
@@ -66,6 +70,7 @@ struct PlayerListView: View {
                     ProgressView()
                     
                     Text("Looking for players...")
+                        .foregroundStyle(.black)
                 }
                 .padding(.vertical)
                     
@@ -78,13 +83,14 @@ struct PlayerListView: View {
             }
             .alert("Connection Request", isPresented: $viewModel.receivedInvite, presenting: viewModel.permissionRequest, actions: { request in
                 
-                Button("Yes", role: .destructive) {
+                Button("Yes", role: .cancel) {
                     request.onRequest(true)
                     viewModel.show(peerId: request.peerId)
                 }
-                Button("No", role: .cancel) {
+                Button("No", role: .destructive) {
                     request.onRequest(false)
                 }
+                
             }, message: { request in
                 Text("Do you want to connect with \(request.peerId.displayName)?")
             })
