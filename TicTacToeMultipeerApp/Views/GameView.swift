@@ -62,15 +62,16 @@ struct PlayerListView: View {
                         viewModel.selectedPeer = peer
                     }
                     .padding(.vertical, 5)
-                    .listRowBackground(Color.black)
+                    .listRowBackground(Color(.bgInverse))
                 }
                 .scrollContentBackground(.hidden)
+                .listRowSpacing(5)
                 
                 VStack(spacing: 10) {
                     ProgressView()
                     
                     Text("Looking for players...")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color(.bgInverse))
                 }
                 .padding(.vertical)
                     
@@ -83,12 +84,13 @@ struct PlayerListView: View {
             }
             .alert("Connection Request", isPresented: $viewModel.receivedInvite, presenting: viewModel.permissionRequest, actions: { request in
                 
+                Button("No", role: .destructive) {
+                    request.onRequest(false)
+                }
+                
                 Button("Yes", role: .cancel) {
                     request.onRequest(true)
                     viewModel.show(peerId: request.peerId)
-                }
-                Button("No", role: .destructive) {
-                    request.onRequest(false)
                 }
                 
             }, message: { request in

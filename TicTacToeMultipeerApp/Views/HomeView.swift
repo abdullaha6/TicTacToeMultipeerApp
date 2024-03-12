@@ -22,20 +22,13 @@ struct HomeView: View {
                     Text("Tic Tac Toe")
                         .tracking(1)
                         .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
-//                        .foregroundStyle(.black)
-                    
-//                    Button(action: {
-//                        viewModel.showTicTacToeView = true
-//                    }, label: {
-//                        TextButton(title: "Play With AI")
-//                            .foregroundStyle(.background)
-//                    })
+                        .foregroundStyle(Color(.bgInverse))
                     
                     NavigationLink {
                         TicTacToeGameView(DFViewModel: DFViewModel)
                     } label: {
                         TextButton(title: "Play with AI")
-//                            .foregroundStyle(Color(.bg))
+                            .foregroundStyle(Color(.bg))
                     }
                     .padding(.top, 50)
                     
@@ -43,18 +36,8 @@ struct HomeView: View {
                         GameView(viewModel: DFViewModel)
                     } label: {
                         TextButton(title: "Multiplayer")
-//                            .foregroundStyle(Color(.bg))
+                            .foregroundStyle(Color(.bg))
                     }
-//                    .padding(.top, 50)
-
-                    
-//                    Button(action: {
-//                        viewModel.isAdvertised   = true
-//                        viewModel.playerListView = true
-//                    }, label: {
-//                        TextButton(title: "Multiplayer")
-//                            .foregroundStyle(.background)
-//                    })
                     
                     Spacer()
                 }
@@ -65,7 +48,7 @@ struct HomeView: View {
             }
 //            .fullScreenCover(isPresented: $viewModel.showTicTacToeView) { TicTacToeGameView(DFViewModel: viewModel) }
         }
-        .tint(.black) // To chagne the color of the back button
+        .tint(Color(.bgInverse)) // To chagne the color of the back button
     }
 }
 

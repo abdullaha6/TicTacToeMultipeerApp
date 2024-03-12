@@ -18,7 +18,7 @@ struct TextButton: View {
             .tracking(2)
             .padding(.vertical, 10)
             .frame(width: 200)
-            .background(isInverse ? Color(.bg) : .black)
+            .background(isInverse ? Color(.bg) : Color(.bgInverse))
             .clipShape(RoundedRectangle(cornerRadius: 7))
     }
 }

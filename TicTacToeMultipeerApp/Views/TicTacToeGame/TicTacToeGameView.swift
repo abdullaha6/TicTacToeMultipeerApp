@@ -26,7 +26,7 @@ struct TicTacToeGameView: View {
                         Image(systemName: "gear")
                             .padding(10)
                             .foregroundStyle(.background)
-                            .background(.black)
+                            .background(Color(.bgInverse))
                             .clipShape(RoundedRectangle(cornerRadius: 7))
                     })
                 }
@@ -37,12 +37,14 @@ struct TicTacToeGameView: View {
                 if gameState.gameStateText.isEmpty {
                     // GAME STATE TEXT
                     Text(DFViewModel.isMyTurn ? "Your Turn" : "Opponent's Turn")
+                        .foregroundStyle(Color(.bgInverse))
                         .frame(height: 30)
                         .bold()
                         .padding(.bottom, 30)
                 } else {
                     // GAME STATE TEXT
                     Text(gameState.gameStateText)
+                        .foregroundStyle(Color(.bgInverse))
                         .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 30))
                         .frame(height: 30)
                         .bold()
@@ -83,16 +85,18 @@ struct TicTacToeGameView: View {
                 .onAppear {
                     onReceivedMove()
                 }
-                .background(.foreground)
-                .border(.black, width: 1)
+                .background(Color(.bgInverse))
+                .border(Color(.bgInverse), width: 1)
                 .padding(.horizontal, 20)
                 
                 HStack {
                     VStack(spacing: 0) {
                         Text("Cross")
+                            .foregroundStyle(Color(.bgInverse))
                             .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 20))
                         
                         Text("\(gameState.crossScore)")
+                            .foregroundStyle(Color(.bgInverse))
                             .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
                     }
                     
@@ -100,9 +104,11 @@ struct TicTacToeGameView: View {
                     
                     VStack(spacing: 0) {
                         Text("Nought")
+                            .foregroundStyle(Color(.bgInverse))
                             .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 20))
                         
                         Text("\(gameState.noughtScore)")
+                            .foregroundStyle(Color(.bgInverse))
                             .font(Font.custom("BodoniSvtyTwoSCITCTT-Book", size: 40))
                     }
                 }
@@ -116,7 +122,7 @@ struct TicTacToeGameView: View {
                     DFViewModel.send(isConnected: true, isGameReset: true, row: 0, col: 0)
                 }, label: {
                     TextButton(title: "Reset Game")
-                        .foregroundStyle(.background)
+                        .foregroundStyle(Color(.bg))
                 })
                 .opacity(gameState.isGameOver ? 1 : 0)
                 

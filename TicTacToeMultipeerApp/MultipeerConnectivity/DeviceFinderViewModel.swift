@@ -198,7 +198,6 @@ extension DeviceFinderViewModel: MCSessionDelegate {
                         onReceived(isConnected, isGameReset, row, col) // If connected, proceed
                     }
                 } else {
-                    print("Disconnecting")
                     if let onReceived = self.onReceived {
                         onReceived(isConnected, isGameReset, row, col)
                     }
